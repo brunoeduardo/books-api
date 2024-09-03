@@ -2,9 +2,15 @@ import http from "http"
 
 const PORT = 3000;
 
+const routes = {
+    "/": "Home page",
+    "/books": "Books page",
+    "/authors": "Authors page"
+}
+
 const server = http.createServer((req, res) => {
     res.writeHead(200, {"Content-type": "text/plain"});
-    res.end('Running!')
+    res.end(routes[req.url])
 })
 
 server.listen(PORT, () => {

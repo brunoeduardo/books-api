@@ -1,18 +1,13 @@
-import http from "http"
+import app from "./src/app.js";
 
 const PORT = 3000;
 
-const routes = {
-    "/": "Home page",
-    "/books": "Books page",
-    "/authors": "Authors page"
-}
 
-const server = http.createServer((req, res) => {
+const server = app.get((req, res) => {
     res.writeHead(200, {"Content-type": "text/plain"});
     res.end(routes[req.url])
 })
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log("Listening")
 })

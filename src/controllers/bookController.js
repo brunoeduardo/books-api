@@ -3,7 +3,7 @@ import book from "../models/Book.js"
 class BookController {
     static async booksList (req, res) {
         try {
-            const listBooks = await book.find({});
+            const listBooks = await book.find();
             res.status(200).json(listBooks);
         } catch (error) {
             res.status(500).json({message: `${erro.message} - failure books list`});            
@@ -12,7 +12,7 @@ class BookController {
 
     static async bookById (req, res) {
         try {
-            const bookIndex = await book.findById({_id: req.params.id});
+            const bookIndex = await book.findById(req.params.id);
             res.status(200).json(bookIndex);
         } catch (error) {
             res.status(500).json({message: `${erro.message} - failure get book by id`});            
@@ -30,8 +30,8 @@ class BookController {
 
     static async bookUpdate (req, res) {
         try {
-            const updatedBook = await book.updateOne({_id: req.params.id}, { title: req.body.title});
-            res.status(200).send({message: "Book updated successfully", book: updatedBook});
+            await book.findByIdAndUpdate(req.params.id, req.body);
+            res.status(200).send({message: "Book updated successfully"});
         } catch (error) {
             res.status(500).json({message: `${erro.message} -  failure book update`});
         }
@@ -39,7 +39,7 @@ class BookController {
 
     static async bookDelete (req, res) {
         try {
-            await book.deleteOne({_id: req.params.id});
+            await book.deleteOne(req.params.id);
             res.status(200).send({message: "Book deleted successfully"});
         } catch (error) {
             res.status(500).json({message: `${erro.message} -  failure delete book`});

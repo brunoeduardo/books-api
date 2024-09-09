@@ -1,16 +1,18 @@
 import express from "express"
 import BookController from "../controllers/bookController.js"
 
-const routes = express.Router();
+const booksRoutes = express.Router();
 
-routes.get("/books", BookController.booksList)
+booksRoutes.get("/books", BookController.booksList)
 
-routes.get("/books/:id", BookController.bookById)
+booksRoutes.get("/books/search", BookController.booksListByPublisher)
 
-routes.post("/books", BookController.registerBook)
+booksRoutes.get("/books/:id", BookController.bookById)
 
-routes.put("/books/:id", BookController.bookUpdate)
+booksRoutes.post("/books", BookController.registerBook)
 
-routes.delete("/books/:id", BookController.bookDelete)
+booksRoutes.put("/books/:id", BookController.bookUpdate)
 
-export default routes;
+booksRoutes.delete("/books/:id", BookController.bookDelete)
+
+export default booksRoutes;
